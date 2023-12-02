@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import cmd
 import sys
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -20,7 +21,15 @@ class HBNBCommand(cmd.Cmd):
     def do_help(self, arg):
         """Get help on a specific command."""
         cmd.Cmd.do_help(self, arg)
+    
+    def do_create(self, arg):
+        if arg == "":
+            print("** class name missing **")
+        else:
+            arg = BaseModel()
+            print(arg.id)
 
+            
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
