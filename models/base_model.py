@@ -4,13 +4,20 @@ if __name__ == "__main__":
     import uuid
 
     class BaseModel:
-        def __init__(self, id=None, name=None, my_number=0, *args, **kwargs):
-            self.id = id if id is not None else str(uuid.uuid4())
-            self.cName = __class__.__name__
-            self.name = name
-            self.created_at = datetime.datetime.now()
-            self.update_at = datetime.datetime.now()
-            self.my_number = my_number
+        def __init__(self, *args, **kwargs):
+            if kwargs:
+                self.id = kwargs["id"]
+                self.created_at = kwargs["created_at"]
+                self.cName = kwargs["__class__"]
+                self.my_number = kwargs["my_number"]
+                self.update_at = kwargs["update_at"]
+            else:
+                self.id = str(uuid.uuid4())
+                self.created_at = datetime.datetime.now()
+                self.cName = __class__.__name__
+                self.my_number = None
+                self.update_at = datetime.datetime.now()
+                self.name = None
 
         def __str__(self):
             return f"[{self.cName}] ({self.id}) {self.to_dict1()}"
@@ -22,9 +29,9 @@ if __name__ == "__main__":
             new_dict = {}
             for i in self.__dict__:
                 if i == "cName":
+                    new_dict["__class__"] = self.cName
                     continue
                 new_dict[i] = getattr(self, i)
-            new_dict["__class__"] = self.cName
             return new_dict
 
         def to_dict1(self):
@@ -34,6 +41,7 @@ if __name__ == "__main__":
                     continue
                 new_dict[i] = getattr(self, i)
             return new_dict
+        
 
 my_model = BaseModel()
 my_model.name = "My_First_Model"
