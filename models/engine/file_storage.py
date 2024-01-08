@@ -3,24 +3,21 @@ import json
 
 
 class FileStorage:
-    def __init__(self, file_path=None, objects=None):
-        self.__file_path = file_path
-        self.__objects = objects
+    __file_path = None
+    __objects = {}
 
-    @property    
     def all(self):
-        return self.__objects
-    
-    @all.setter
-    def  new(self, obj):
-        key = f"{obj.__class__.__name__ } + {self.id}"
-        self.__objects["key"] = key
-    
+        return self.__dict__(FileStorage.__objects)
+
     def save(self):
-        with open(self.__file_path, "w") as fp:
+        with open(FileStorage.__file_path, "w") as fp:
             fp.write(json.dumps(self.all()))
-    
+
     def reload(self):
-        if self.__file_path != None:
-            with open(self.__file_path, "r") as fp:
-                 self.new(json.loads(fp.read()))
+        if FileStorage.__file_path is not None:
+            with open(FileStorage.__file_path, "r") as fp:
+                self.new(json.loads(fp.read()))
+
+    def new(self, obj):
+        key = f"{obj['__class__']}.{obj['id']}"
+        FileStorage.__objects[key] = obj
