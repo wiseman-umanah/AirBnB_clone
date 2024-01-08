@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 import datetime
 import uuid
-
+from models.__init__ import storage
 
 class BaseModel:
     def __init__(self, *args, **kwargs):
-        if kwargs:
+        if args:
+            storage.new()
+        elif kwargs:
             self.id = kwargs["id"]
             self.created_at = datetime.datetime.fromisoformat(
                 kwargs["created_at"])
@@ -21,6 +23,7 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.datetime.now()
+        storage.save()
 
     def to_dict(self):
         self.updated_at = datetime.datetime.isoformat(self.updated_at)
