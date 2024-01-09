@@ -1,23 +1,45 @@
 #!/usr/bin/python3
+"""Defines the FileStorage class."""
 import json
 
 
+
 class FileStorage:
-    __file_path = None
+    """Represent an abstracted storage engine.
+
+    Attributes:
+        __file_path (str): The name of the file to save objects to.
+        __objects (dict): A dictionary of instantiated objects.
+    """
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        return self.__dict__(FileStorage.__objects)
-
-    def save(self):
-        with open(FileStorage.__file_path, "w") as fp:
-            fp.write(json.dumps(self.all()))
-
-    def reload(self):
-        if FileStorage.__file_path is not None:
-            with open(FileStorage.__file_path, "r") as fp:
-                self.new(json.loads(fp.read()))
+        """Return the dictionary __objects."""
+        return FileStorage.__objects
 
     def new(self, obj):
-        key = f"{obj['__class__']}.{obj['id']}"
-        FileStorage.__objects[key] = obj
+        """Set in __objects obj with key <obj_class_name>.id"""
+        cname = obj.__class__.__name__
+        FileStorage.__objects["{}.{}".format(cname, obj.id)] = obj
+
+    def save(self):
+        """Serialize __objects to the JSON file __file_path."""
+        dictTemp = FileStorage.__objects
+        objdict = {}
+        for obj in dictTemp.keys():
+            objdict[obj] = dictTemp[obj].to_dict()
+        with open(FileStorage.__file_path, "w") as f:
+            f.write(json.dumps(objdict))
+
+    def reload(self):
+        """Deserialize the JSON file __file_path to __objects, if it exists."""
+        try:
+            with open(FileStorage.__file_path) as f:
+                objdict = json.load(f)
+                for o in objdict.values():
+                    cls_name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(cls_name)(**o))
+        except FileNotFoundError:
+            return
