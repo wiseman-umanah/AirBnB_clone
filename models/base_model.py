@@ -28,7 +28,11 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        self.updated_at = datetime.datetime.isoformat(self.updated_at)
-        self.created_at = datetime.datetime.isoformat(self.created_at)
-        self.__dict__["__class__"] = __class__.__name__
-        return (self.__dict__)
+        if isinstance(self.updated_at, datetime.datetime):
+            self.updated_at = datetime.datetime.isoformat(self.updated_at)
+        if isinstance(self.created_at, datetime.datetime):
+            self.created_at = datetime.datetime.isoformat(self.created_at)
+        result = self.__dict__.copy()
+        result["__class__"] = __class__.__name__
+
+        return result
