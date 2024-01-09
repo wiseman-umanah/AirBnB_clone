@@ -72,11 +72,46 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         keys = storage.all()
-        keydict = [str(keys[i]) for i in keys.keys()]
+        keydict = []
+        if arg == "":
+            keydict = [str(keys[i]) for i in keys.keys()]
+        elif arg == "BaseModel":
+            for i in keys.keys():
+                if i.startswith("BaseModel"):
+                    keydict.append(str(keys[i]))
+        else:
+            print("** class doesn't exist **")
+            return
         print(keydict)
 
-        
-
+    def do_update(self, arg):
+        try:
+            if arg == "":
+                raise NameError
+            args = self.split_string(arg)
+            if args[0] != "BaseModel":
+                print("** class doesn't exist **")
+                return
+            elif len(args) == 1:
+                print("** instance id missing **")
+                return
+            elif len(args) == 2:
+                print("** attribute name missing **")
+                return
+            name = f"{args[0]}.{args[1]}"
+            odict = {args[i]: args[i + 1] for i in range(2, len(args), 2)}
+            keys = storage.all()
+            if name in keys:
+                obj = keys[name]
+                for i, j in odict.items():
+                    setattr(obj, i, j)
+                storage.save()
+            else:
+                print("** no instance found **")
+        except NameError:
+            print('** class name missing **')
+        except IndexError:
+            print("** value missing **")
 
 
 if __name__ == '__main__':
