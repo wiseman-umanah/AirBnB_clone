@@ -11,7 +11,6 @@ from models.review import Review
 from models.state import State
 
 
-
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     models = {
@@ -29,9 +28,6 @@ class HBNBCommand(cmd.Cmd):
         if input is not None:
             return input.split(char)
 
-    def do_emptyline(self, arg):
-        return
-    
     def do_quit(self, arg):
         """Quit command to exit the program"""
         sys.exit()
@@ -43,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
     def do_help(self, arg):
         """Get help on a specific command."""
         cmd.Cmd.do_help(self, arg)
-    
+
     def do_create(self, arg):
         if arg == "":
             print("** class name missing **")
@@ -53,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
             arg = HBNBCommand.models[arg]()
             print(arg.id)
             arg.save()
-    
+
     def do_show(self, arg):
         if arg == "":
             print("** class name missing **")
@@ -72,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
         except IndexError:
             print("** instance id missing **")
-        
+
     def do_destroy(self, arg):
         if arg == "":
             print("** class name missing **")
@@ -133,6 +129,12 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
         except IndexError:
             print("** value missing **")
+
+    def emptyline(self):
+        return
+
+    # def default(self, arg):
+    #     print(len(arg))
 
 
 if __name__ == '__main__':
