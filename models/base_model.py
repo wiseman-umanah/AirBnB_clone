@@ -33,6 +33,6 @@ class BaseModel:
         if isinstance(self.created_at, datetime.datetime):
             self.created_at = datetime.datetime.isoformat(self.created_at)
         result = self.__dict__.copy()
-        result["__class__"] = __class__.__name__
+        result["__class__"] = self.__class__.__name__
 
         return result
