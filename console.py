@@ -57,46 +57,48 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         if arg == "":
             print("** class name missing **")
-        elif arg.startswith("BaseModel"):
-            try:
-                args = self.split_string(arg, " ")
-                obj = f"{args[0]}.{args[1]}"
-                keys = storage.all()
-                for i in keys.keys():
-                    if i == obj:
-                        print(keys[i])
-                        return
-                print("** no instance found **")
-            except IndexError:
-                print("** instance id missing **")
-        else:
-            print("** class doesn't exist **")
+            return
+        try:
+            args = self.split_string(arg, " ")
+            if args[0] not in HBNBCommand.models:
+                print("** class doesn't exist **")
+                return
+            obj = f"{args[0]}.{args[1]}"
+            keys = storage.all()
+            for i in keys.keys():
+                if i == obj:
+                    print(keys[i])
+                    return
+            print("** no instance found **")
+        except IndexError:
+            print("** instance id missing **")
         
     def do_destroy(self, arg):
         if arg == "":
             print("** class name missing **")
-        elif arg.startswith("BaseModel"):
-            try:
-                args = self.split_string(arg, " ")
-                obj = f"{args[0]}.{args[1]}"
-                keys = storage.all()
-                del keys[obj]
-                storage.save()
-            except IndexError:
-                print("** instance id missing **")
-            except KeyError:
-                print("** no instance found **")
-        else:
-            print("** class doesn't exist **")
+            return
+        try:
+            args = self.split_string(arg, " ")
+            if args[0] not in HBNBCommand.models:
+                print("** class doesn't exist **")
+                return
+            obj = f"{args[0]}.{args[1]}"
+            keys = storage.all()
+            del keys[obj]
+            storage.save()
+        except IndexError:
+            print("** instance id missing **")
+        except KeyError:
+            print("** no instance found **")
 
     def do_all(self, arg):
         keys = storage.all()
         keydict = []
         if arg == "":
             keydict = [str(keys[i]) for i in keys.keys()]
-        elif arg == "BaseModel":
+        elif arg in HBNBCommand.models:
             for i in keys.keys():
-                if i.startswith("BaseModel"):
+                if i.startswith(arg):
                     keydict.append(str(keys[i]))
         else:
             print("** class doesn't exist **")
@@ -108,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
             if arg == "":
                 raise NameError
             args = self.split_string(arg)
-            if args[0] != "BaseModel":
+            if args[0] not in HBNBCommand.models:
                 print("** class doesn't exist **")
                 return
             elif len(args) == 1:
