@@ -10,7 +10,6 @@ from models.state import State
 import json
 
 
-
 class FileStorage:
     """Represent an abstracted storage engine.
 
