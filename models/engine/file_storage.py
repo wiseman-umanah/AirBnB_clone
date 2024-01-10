@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Defines the FileStorage class."""
+"""Defines the FileStorage class.
+This is the storage mechanism for all the class
+"""
 from models.base_model import BaseModel
 from models.user import User
 from models.amenity import Amenity
@@ -25,7 +27,11 @@ class FileStorage:
         return FileStorage.__objects
 
     def new(self, obj):
-        """Set in __objects obj with key <obj_class_name>.id"""
+        """Set in __objects obj with key <obj_class_name>.id
+        
+        Args:
+        	obj: The object i.e the class
+        """
         ocname = obj.__class__.__name__
         FileStorage.__objects["{}.{}".format(ocname, obj.id)] = obj
 

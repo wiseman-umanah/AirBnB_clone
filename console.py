@@ -1,4 +1,11 @@
 #!/usr/bin/python3
+"""This Module is the command-line interpreter of the Class
+
+All functions and properties of each class can be
+executed via the command line with basic command line interface
+
+Type <help> <command>
+"""
 import cmd
 import sys
 from models import storage
@@ -12,6 +19,19 @@ from models.state import State
 
 
 class HBNBCommand(cmd.Cmd):
+    """Represents the CLI of the program
+
+    Methods:
+        do_quit: Quits the program
+        do_EOF: Quits program if command is <CTRL + D>
+        do_help: Contains the help information of commands
+        do_create: creates new instance bsed on class
+        do_show: shows the detail of file.json based on class and id
+        do_destroy: destroys an instance based on class and id
+        do_all: prints all instances in file.json or only of a class
+        do_update: updates a class with name:value based on class and id
+        emptyline: prints/returns nothing if line is empty
+    """
     prompt = "(hbnb) "
     models = {
         "BaseModel": BaseModel,
@@ -24,23 +44,50 @@ class HBNBCommand(cmd.Cmd):
     }
 
     @staticmethod
-    def split_string(input=None, char=" "):
+    def split_string(input=None, deli=" "):
+        """Function split a given string based on char
+
+        Args:
+            input (str): The input string from user
+            deli (str): The delimiter for breaking strings
+
+        Return:
+            a list of broken string
+        """
         if input is not None:
-            return input.split(char)
+            return input.split(deli)
 
     def do_quit(self, arg):
-        """Quit command to exit the program"""
+        """Quit command to exit the program
+
+        Usage: quit
+        """
         sys.exit()
 
     def do_EOF(self, arg):
-        """This function will close the program after to indicate EOF"""
+        """This function will close the program after to indicate EOF
+
+        Usage: <CTRL> + <D>
+        """
         sys.exit()
 
     def do_help(self, arg):
-        """Get help on a specific command."""
+        """Get help on a specific command
+
+        Usage: help 'or' help <command>
+        """
         cmd.Cmd.do_help(self, arg)
 
     def do_create(self, arg):
+        """Creates a new instance based on class name
+        and saves it to file.json
+
+        Usage: create <classname>
+
+        Errors:
+            if class name is missing
+            if class name doesn't exist
+        """
         if arg == "":
             print("** class name missing **")
         elif arg not in HBNBCommand.models:
@@ -51,6 +98,17 @@ class HBNBCommand(cmd.Cmd):
             arg.save()
 
     def do_show(self, arg):
+        """Prints all the instance details
+        based on the classname and classId
+
+        Usage: show <class.name> <class.id>
+
+        Errors:
+            if classname is missing
+            if classname doesn't exist
+            if class id is not found
+            if class id is missing
+        """
         if arg == "":
             print("** class name missing **")
             return
@@ -70,6 +128,17 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
 
     def do_destroy(self, arg):
+        """Function destroys a class instance
+        based on classname and classId
+
+        Usage: destroy <class.name> <class.id>
+
+        Errors:
+            if classname is missing
+            if classname doesn't exist
+            if class id is not found
+            if class id is missing
+        """
         if arg == "":
             print("** class name missing **")
             return
@@ -88,6 +157,13 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
+        """Displays all the instances/instances of a class
+
+        Usage: all 'or' all <classname>
+
+        Errors:
+            if class name doesn't exist
+        """
         keys = storage.all()
         keydict = []
         if arg == "":
@@ -102,6 +178,20 @@ class HBNBCommand(cmd.Cmd):
         print(keydict)
 
     def do_update(self, arg):
+        """Function updates an instance
+        based on classname, id and name:value
+
+        Usage: update <class.name> <class.id>
+        <attribute.name> <attribute.value...>
+
+        Errors:
+            if classname is missing
+            if classname doesn't exist
+            if class id is not found
+            if class id is missing
+            if attribute name is missing
+            if attribute value is missing
+        """
         try:
             if arg == "":
                 raise NameError
@@ -131,6 +221,7 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
 
     def emptyline(self):
+        """Do nothing to screen"""
         return
 
     # def default(self, arg):
