@@ -3,16 +3,24 @@ import cmd
 import sys
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
+    models = {
+        "BaseModel": BaseModel,
+        "User": User
+    }
 
     @staticmethod
     def split_string(input=None, char=" "):
         if input is not None:
             return input.split(char)
 
+    def do_emptyline(self, arg):
+        return
+    
     def do_quit(self, arg):
         """Quit command to exit the program"""
         sys.exit()
@@ -24,14 +32,14 @@ class HBNBCommand(cmd.Cmd):
     def do_help(self, arg):
         """Get help on a specific command."""
         cmd.Cmd.do_help(self, arg)
-	
+    
     def do_create(self, arg):
         if arg == "":
             print("** class name missing **")
-        elif arg != "BaseModel":
+        elif arg not in HBNBCommand.models:
             print("** class doesn't exist **")
         else:
-            arg = BaseModel()
+            arg = HBNBCommand.models[arg]()
             print(arg.id)
             arg.save()
     
