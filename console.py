@@ -8,6 +8,7 @@ Type <help> <command>
 """
 import cmd
 import sys
+import re
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -30,6 +31,8 @@ class HBNBCommand(cmd.Cmd):
         do_destroy: destroys an instance based on class and id
         do_all: prints all instances in file.json or only of a class
         do_update: updates a class with name:value based on class and id
+        do_count: counts the number of instances present in database
+        default: to parse commands that are <classname>.<command>
         emptyline: prints/returns nothing if line is empty
     """
     prompt = "(hbnb) "
@@ -41,6 +44,13 @@ class HBNBCommand(cmd.Cmd):
         "Place": Place,
         "Review": Review,
         "State": State
+    }
+    commands = {
+        "create",
+        "show",
+        "destroy",
+        "all",
+        "update"
     }
 
     @staticmethod
@@ -82,7 +92,8 @@ class HBNBCommand(cmd.Cmd):
         """Creates a new instance based on class name
         and saves it to file.json
 
-        Usage: create <classname>
+        Usage: create <classname> 'or'
+        <class name>.create()
 
         Errors:
             if class name is missing
@@ -101,7 +112,8 @@ class HBNBCommand(cmd.Cmd):
         """Prints all the instance details
         based on the classname and classId
 
-        Usage: show <class.name> <class.id>
+        Usage: show <class.name> <class.id> 'or'
+        <class name>.show(<id>)
 
         Errors:
             if classname is missing
@@ -131,7 +143,8 @@ class HBNBCommand(cmd.Cmd):
         """Function destroys a class instance
         based on classname and classId
 
-        Usage: destroy <class.name> <class.id>
+        Usage: destroy <class.name> <class.id> 'or'
+        <class name>.destroy(<id>)
 
         Errors:
             if classname is missing
@@ -159,7 +172,8 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Displays all the instances/instances of a class
 
-        Usage: all 'or' all <classname>
+        Usage: all 'or' all <class name> 'or'
+        <class name>.all()
 
         Errors:
             if class name doesn't exist
@@ -181,8 +195,9 @@ class HBNBCommand(cmd.Cmd):
         """Function updates an instance
         based on classname, id and name:value
 
-        Usage: update <class.name> <class.id>
-        <attribute.name> <attribute.value...>
+        Usage: update <class name> <id>
+        <attribute name> <attribute value...> 'or'
+        <class name>.update(<id>, <attribute name>, <attribute value>)
 
         Errors:
             if classname is missing
@@ -220,12 +235,45 @@ class HBNBCommand(cmd.Cmd):
         except IndexError:
             print("** value missing **")
 
+    def do_count(self, arg):
+        """Counts the number of instances present in database
+
+        Usage: <class name>.count()
+        """
+        if arg == "":
+            print("** class name missing **")
+            return
+        argl = self.split_string(arg)
+        count = 0
+        for obj in storage.all().values():
+            if argl[0] == obj.__class__.__name__:
+                count += 1
+        print(count)
+
     def emptyline(self):
         """Do nothing to screen"""
         return
 
-    # def default(self, arg):
-    #     print(len(arg))
+    def default(self, arg):
+        """Default behavior for cmd module when input is invalid"""
+        argdict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in argdict.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return argdict[command[0]](call)
+        print("*** Unknown syntax: {}".format(arg))
+        return False
 
 
 if __name__ == '__main__':
