@@ -45,13 +45,6 @@ class HBNBCommand(cmd.Cmd):
         "Review": Review,
         "State": State
     }
-    commands = {
-        "create",
-        "show",
-        "destroy",
-        "all",
-        "update"
-    }
 
     @staticmethod
     def split_string(input=None, deli=" "):
@@ -99,12 +92,13 @@ class HBNBCommand(cmd.Cmd):
             if class name is missing
             if class name doesn't exist
         """
-        if arg == "":
+        argl = self.split_string(arg)
+        if argl[0] == "":
             print("** class name missing **")
-        elif arg not in HBNBCommand.models:
+        elif argl[0] not in HBNBCommand.models:
             print("** class doesn't exist **")
         else:
-            arg = HBNBCommand.models[arg]()
+            arg = HBNBCommand.models[argl[0]]()
             print(arg.id)
             arg.save()
 
@@ -180,11 +174,12 @@ class HBNBCommand(cmd.Cmd):
         """
         keys = storage.all()
         keydict = []
-        if arg == "":
+        argl = self.split_string(arg)
+        if argl[0] == "":
             keydict = [str(keys[i]) for i in keys.keys()]
-        elif arg in HBNBCommand.models:
+        elif argl[0] in HBNBCommand.models:
             for i in keys.keys():
-                if i.startswith(arg):
+                if i.startswith(argl[0]):
                     keydict.append(str(keys[i]))
         else:
             print("** class doesn't exist **")
@@ -214,7 +209,7 @@ class HBNBCommand(cmd.Cmd):
             if args[0] not in HBNBCommand.models:
                 print("** class doesn't exist **")
                 return
-            elif len(args) == 1:
+            elif len(args) == 1 or args[1] == "":
                 print("** instance id missing **")
                 return
             elif len(args) == 2:
@@ -255,25 +250,30 @@ class HBNBCommand(cmd.Cmd):
         return
 
     def default(self, arg):
-        """Default behavior for cmd module when input is invalid"""
-        argdict = {
+        """Parse commands that are <classname>.<command>
+        e.g User.create()
+        and checks if command is True"""
+        coms = {
+            "create": self.do_create,
             "all": self.do_all,
-            "show": self.do_show,
-            "destroy": self.do_destroy,
             "count": self.do_count,
-            "update": self.do_update
+            "update": self.do_update,
+            "destroy": self.do_destroy,
+            "show": self.do_show
         }
-        match = re.search(r"\.", arg)
-        if match is not None:
-            argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
-            match = re.search(r"\((.*?)\)", argl[1])
-            if match is not None:
-                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
-                if command[0] in argdict.keys():
-                    call = "{} {}".format(argl[0], command[1])
-                    return argdict[command[0]](call)
-        print("*** Unknown syntax: {}".format(arg))
-        return False
+        # model: model name
+        # act: the command to execute
+        # det: other parameters in "()"
+        # shorten because of pycodestyle
+        args = re.match(r"(?P<model>\w+)\.(?P<act>\w+)\((?P<det>.*?)\)", arg)
+        if args:
+            model = args.group("model")
+            act = args.group("act")
+            det = args.group("det")
+            det = det.replace(",", "")
+            coms[act](f"{model} {det}")
+        else:
+            print(f"** Unknown syntax: {arg}")
 
 
 if __name__ == '__main__':
