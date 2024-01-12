@@ -216,7 +216,15 @@ class HBNBCommand(cmd.Cmd):
                 print("** attribute name missing **")
                 return
             name = f"{args[0]}.{args[1]}"
-            odict = {args[i]: args[i + 1] for i in range(2, len(args), 2)}
+            odict = {}
+            for i in range(2, len(args), 2):
+                key = args[i]
+                key = key.replace("{", "").replace(":", "")
+                key = key.replace("}", "").replace('"', "")
+                value = args[i + 1]
+                value = value.replace("{", "").replace(":", "")
+                value = value.replace("}", "").replace('"', "")
+                odict[key] = value
             keys = storage.all()
             if name in keys:
                 obj = keys[name]
