@@ -8,6 +8,4 @@ class State(BaseModel):
 
     Attributes:
         name (str): empty string; updated later"""
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.name = ""
+    name = ""

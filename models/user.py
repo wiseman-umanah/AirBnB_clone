@@ -11,9 +11,7 @@ class User(BaseModel):
         password (str): empty for now
         first_name (str): empty for now
         last_name (str): empty for now"""
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.email = ""
-        self.password = ""
-        self.first_name = ""
-        self.lastname = ""
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
