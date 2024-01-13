@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Tests all functions and return values of Place Module"""
 import unittest
 from datetime import datetime as dt
