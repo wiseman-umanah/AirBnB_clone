@@ -43,6 +43,7 @@ The console is a Unix shell-like command line user interface provided by the pyt
 |Quit console                         | (hbnb)quit                                                                   |
 
 Help command example
+
 ![help-com](image-1.png)
 
 ## Class Models Used
