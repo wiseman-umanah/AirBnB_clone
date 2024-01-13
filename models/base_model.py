@@ -25,7 +25,7 @@ class BaseModel:
         Args:
             args: list of instance data
             kwargs: dictionary representation of instance
-        """    
+        """
         if len(kwargs) != 0:
             self.id = kwargs["id"]
             self.created_at = datetime.datetime.fromisoformat(
