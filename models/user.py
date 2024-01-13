@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 class User(BaseModel):
     """This class saves the details of the User
 
-    Attributes:
+    Attribute:
         email (str): empty email; updated later
         password (str): empty for now
         first_name (str): empty for now
