@@ -25,10 +25,8 @@ class BaseModel:
         Args:
             args: list of instance data
             kwargs: dictionary representation of instance
-        """
-        if args:
-            models.storage.new()
-        elif kwargs:
+        """    
+        if len(kwargs) != 0:
             self.id = kwargs["id"]
             self.created_at = datetime.datetime.fromisoformat(
                 kwargs["created_at"])
@@ -38,6 +36,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """Function to return the string representation of instance
