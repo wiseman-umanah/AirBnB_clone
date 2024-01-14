@@ -7,7 +7,7 @@ from models.place import Place
 
 
 class TestPlace(unittest.TestCase):
-	"""Contains functions that are useful
+    """Contains functions that are useful
     for testing the place module"""
     def setUp(self):
         """Initializes static values for test Places"""
@@ -136,8 +136,8 @@ class TestPlace(unittest.TestCase):
         self.assertTrue("amenity_ids" in temp.to_dict())
 
     def test_class_attr(self):
-		"""Checks the initial value of each variable
-		of the place module"""
+        """Checks the initial value of each variable
+        of the place module"""
         self.assertEqual(self.place().name, "")
         self.assertEqual(self.place().city_id, "")
         self.assertEqual(self.place().user_id, "")

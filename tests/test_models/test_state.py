@@ -7,7 +7,7 @@ from models.state import State
 
 
 class TestState(unittest.TestCase):
-	"""Contains functions that are useful
+    """Contains functions that are useful
     for testing the State module"""
     def setUp(self):
         """Initializes static values for test States"""
@@ -97,7 +97,7 @@ class TestState(unittest.TestCase):
         self.assertTrue("name" in temp.to_dict())
 
     def test_class_attr(self):
-		"""Checks inital value of state module"""
+        """Checks inital value of state module"""
         self.assertEqual(self.state().name, "")
 
 
