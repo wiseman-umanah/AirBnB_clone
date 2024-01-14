@@ -66,7 +66,7 @@ Help command example
 
 ## Tests
 
-Code is still under testing for the moment.
+Each class, function and module have been tested and proven to be True.
 
 ## Authors
 
