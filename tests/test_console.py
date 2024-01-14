@@ -289,7 +289,7 @@ class TestConsole(unittest.TestCase):
                 "BaseModel.update(o-w1e2992w1,{first_name: Jane})"
                 )
             IOp = fp.getvalue().strip()
-        self.assertEqual("** no instance found **", IOp)
+        self.assertEqual("** value missing **", IOp)
 
     def test_count1(self):
         """Checks the behaviour of count function of
