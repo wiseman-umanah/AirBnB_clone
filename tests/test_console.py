@@ -285,7 +285,9 @@ class TestConsole(unittest.TestCase):
         """Checks the behaviour of update function of
         console with unusual parameters"""
         with patch('sys.stdout', new_callable=StringIO) as fp:
-            self.con.onecmd("BaseModel.update(o-w1e2992w1, {first_name: Jane})")
+            self.con.onecmd(
+                "BaseModel.update(o-w1e2992w1,{first_name: Jane})"
+                )
             IOp = fp.getvalue().strip()
         self.assertEqual("** no instance found **", IOp)
 
