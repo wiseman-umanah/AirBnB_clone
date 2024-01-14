@@ -7,6 +7,8 @@ from models.city import City
 
 
 class TestCity(unittest.TestCase):
+	"""Contains functions that are useful
+    for testing the city module"""
     def setUp(self):
         """Initializes static values for test Citys"""
         self.city = City
@@ -99,6 +101,8 @@ class TestCity(unittest.TestCase):
         self.assertTrue("age" in temp.to_dict())
 
     def test_class_attr(self):
+		"""Checks that each variable in module
+		is first initialized with an empty string"""
         self.assertEqual(self.city().state_id, "")
         self.assertEqual(self.city().name, "")
 

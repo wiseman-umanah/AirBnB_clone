@@ -7,6 +7,8 @@ from models.amenity import Amenity
 
 
 class TestAmenity(unittest.TestCase):
+	"""Contains functions that are useful
+    for testing amenity module"""
     def setUp(self):
         """Initializes static values for test Amenitys"""
         self.amenity = Amenity
@@ -99,6 +101,8 @@ class TestAmenity(unittest.TestCase):
         self.assertTrue("age" in temp.to_dict())
 
     def test_class_attr(self):
+		"""Checks that name variable is first
+		an empty string"""
         self.assertEqual(self.amenity().name, "")
 
 

@@ -7,6 +7,8 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
+	"""Contains functions that are useful
+    for testing the BaseModel module"""
     def setUp(self):
         """Initializes static values for test cases"""
         self.base = BaseModel

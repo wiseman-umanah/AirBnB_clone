@@ -7,6 +7,8 @@ from models.user import User
 
 
 class TestUser(unittest.TestCase):
+	"""Contains functions that are useful
+    for testing the User module"""
     def setUp(self):
         """Initializes static values for test cases"""
         self.user = User
@@ -107,6 +109,8 @@ class TestUser(unittest.TestCase):
         self.assertTrue("last_name" in temp.to_dict())
 
     def test_class_attr(self):
+		"""Checks initial value of variables of
+		the user module"""
         self.assertEqual(self.user().email, "")
         self.assertEqual(self.user().password, "")
         self.assertEqual(self.user().first_name, "")

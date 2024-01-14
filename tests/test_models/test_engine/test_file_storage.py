@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""This module contains test cases for
+the file storage system"""
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
@@ -11,6 +13,8 @@ import unittest
 
 
 class FileStoreCheck(unittest.TestCase):
+    """Contains functions that are useful
+    for testing file storage system of the program"""
     def setUp(self):
         """Initialize a fileStorage"""
         self.file = FileStorage()

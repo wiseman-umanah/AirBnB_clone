@@ -7,6 +7,8 @@ from models.review import Review
 
 
 class TestReview(unittest.TestCase):
+	"""Contains functions that are useful
+    for testing the Review module"""
     def setUp(self):
         """Initializes static values for test Reviews"""
         self.review = Review
@@ -103,6 +105,7 @@ class TestReview(unittest.TestCase):
         self.assertTrue("user_id" in temp.to_dict())
 
     def test_class_attr(self):
+		"""Checks the inital value of vaiables"""
         self.assertEqual(self.review().text, "")
         self.assertEqual(self.review().place_id, "")
         self.assertEqual(self.review().user_id, "")
