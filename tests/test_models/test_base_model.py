@@ -97,3 +97,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(age, temp.age)
         self.assertTrue("name" in temp.to_dict())
         self.assertTrue("age" in temp.to_dict())
+
+
+if __name__ == "__main__":
+    unittest.main()

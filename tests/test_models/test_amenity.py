@@ -100,3 +100,7 @@ class TestAmenity(unittest.TestCase):
 
     def test_class_attr(self):
         self.assertEqual(self.amenity().name, "")
+
+
+if __name__ == "__main__":
+    unittest.main()

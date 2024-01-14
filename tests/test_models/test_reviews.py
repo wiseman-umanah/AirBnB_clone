@@ -106,3 +106,7 @@ class TestReview(unittest.TestCase):
         self.assertEqual(self.review().text, "")
         self.assertEqual(self.review().place_id, "")
         self.assertEqual(self.review().user_id, "")
+
+
+if __name__ == "__main__":
+    unittest.main()

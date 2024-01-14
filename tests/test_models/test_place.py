@@ -145,3 +145,7 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(self.place().number_room, 0)
         self.assertEqual(self.place().longitude, 0.0)
         self.assertEqual(self.place().amenity_ids, [])
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -101,3 +101,7 @@ class TestCity(unittest.TestCase):
     def test_class_attr(self):
         self.assertEqual(self.city().state_id, "")
         self.assertEqual(self.city().name, "")
+
+
+if __name__ == "__main__":
+    unittest.main()

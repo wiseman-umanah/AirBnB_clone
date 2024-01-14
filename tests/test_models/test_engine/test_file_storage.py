@@ -102,3 +102,7 @@ class FileStoreCheck(unittest.TestCase):
         key = f"State.{newIns['id']}"
         self.file.new(State(**newIns))
         self.assertTrue(key in self.file.all())
+
+
+if __name__ == "__main__":
+    unittest.main()
