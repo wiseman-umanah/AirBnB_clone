@@ -13,12 +13,12 @@ class TestConsole(unittest.TestCase):
     def setUp(self):
         """Setup class for testing"""
         self.con = HBNBCommand()
-    
+
     def test_prompt(self):
         """Checks if prompt is the same
         as directing in the project outline"""
         self.assertEqual(self.con.prompt, "(hbnb) ")
-    
+
     def test_models(self):
         """Checks if models are available in
         console dictionary containing models"""
@@ -56,7 +56,7 @@ class TestConsole(unittest.TestCase):
             self.con.onecmd("create")
             IOp = fp.getvalue().strip()
         self.assertEqual("** class name missing **", IOp)
-    
+
     def test_create2(self):
         """Checks the behaviour of create function of
         console with unusual parameters"""
@@ -152,7 +152,7 @@ class TestConsole(unittest.TestCase):
             self.con.onecmd("destroy User")
             IOp = fp.getvalue().strip()
         self.assertEqual("** instance id missing **", IOp)
-    
+
     def test_destroy5(self):
         """Checks the behaviour of destroy function of
         console with unusual parameters"""
@@ -176,7 +176,7 @@ class TestConsole(unittest.TestCase):
             self.con.onecmd("User.destroy()")
             IOp = fp.getvalue().strip()
         self.assertEqual("** no instance found **", IOp)
-    
+
     def test_all1(self):
         """Checks the behaviour of all function of
         console with unusual parameters"""
@@ -224,7 +224,7 @@ class TestConsole(unittest.TestCase):
             self.con.onecmd("update User")
             IOp = fp.getvalue().strip()
         self.assertEqual("** instance id missing **", IOp)
-    
+
     def test_update5(self):
         """Checks the behaviour of update function of
         console with unusual parameters"""
@@ -240,7 +240,7 @@ class TestConsole(unittest.TestCase):
             self.con.onecmd("update BaseModel o-w1e2992w1 first_name Jane")
             IOp = fp.getvalue().strip()
         self.assertEqual("** no instance found **", IOp)
-    
+
     def test_update7(self):
         """Checks the behaviour of update function of
         console with unusual parameters"""
@@ -264,7 +264,7 @@ class TestConsole(unittest.TestCase):
             self.con.onecmd("User.update()")
             IOp = fp.getvalue().strip()
         self.assertEqual("** instance id missing **", IOp)
-    
+
     def test_update10(self):
         """Checks the behaviour of update function of
         console with unusual parameters"""
@@ -280,7 +280,7 @@ class TestConsole(unittest.TestCase):
             self.con.onecmd("BaseModel.update(o-w1e2992w1 first_name Jane)")
             IOp = fp.getvalue().strip()
         self.assertEqual("** no instance found **", IOp)
-    
+
     def test_update12(self):
         """Checks the behaviour of update function of
         console with unusual parameters"""
@@ -296,7 +296,7 @@ class TestConsole(unittest.TestCase):
             self.con.onecmd("count")
             IOp = fp.getvalue().strip()
         self.assertEqual("** class name missing **", IOp)
-    
+
     def test_count2(self):
         """Checks the behaviour of count function of
         console with unusual parameters"""
@@ -304,7 +304,7 @@ class TestConsole(unittest.TestCase):
             self.con.onecmd("count Snow")
             IOp = fp.getvalue().strip()
         self.assertEqual("0", IOp)
-    
+
     def test_count2(self):
         """Checks the behaviour of count function of
         console with unusual parameters"""
