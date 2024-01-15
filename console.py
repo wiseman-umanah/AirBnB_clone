@@ -8,6 +8,7 @@ Type <help> <command>
 """
 import cmd
 import sys
+import re
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -30,6 +31,8 @@ class HBNBCommand(cmd.Cmd):
         do_destroy: destroys an instance based on class and id
         do_all: prints all instances in file.json or only of a class
         do_update: updates a class with name:value based on class and id
+        do_count: counts the number of instances present in database
+        default: to parse commands that are <classname>.<command>
         emptyline: prints/returns nothing if line is empty
     """
     prompt = "(hbnb) "
@@ -82,18 +85,20 @@ class HBNBCommand(cmd.Cmd):
         """Creates a new instance based on class name
         and saves it to file.json
 
-        Usage: create <classname>
+        Usage: create <classname> 'or'
+        <class name>.create()
 
         Errors:
             if class name is missing
             if class name doesn't exist
         """
-        if arg == "":
+        argl = self.split_string(arg)
+        if argl[0] == "":
             print("** class name missing **")
-        elif arg not in HBNBCommand.models:
+        elif argl[0] not in HBNBCommand.models:
             print("** class doesn't exist **")
         else:
-            arg = HBNBCommand.models[arg]()
+            arg = HBNBCommand.models[argl[0]]()
             print(arg.id)
             arg.save()
 
@@ -101,7 +106,8 @@ class HBNBCommand(cmd.Cmd):
         """Prints all the instance details
         based on the classname and classId
 
-        Usage: show <class.name> <class.id>
+        Usage: show <class.name> <class.id> 'or'
+        <class name>.show(<id>)
 
         Errors:
             if classname is missing
@@ -131,7 +137,8 @@ class HBNBCommand(cmd.Cmd):
         """Function destroys a class instance
         based on classname and classId
 
-        Usage: destroy <class.name> <class.id>
+        Usage: destroy <class.name> <class.id> 'or'
+        <class name>.destroy(<id>)
 
         Errors:
             if classname is missing
@@ -159,18 +166,20 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Displays all the instances/instances of a class
 
-        Usage: all 'or' all <classname>
+        Usage: all 'or' all <class name> 'or'
+        <class name>.all()
 
         Errors:
             if class name doesn't exist
         """
         keys = storage.all()
         keydict = []
-        if arg == "":
+        argl = self.split_string(arg)
+        if argl[0] == "":
             keydict = [str(keys[i]) for i in keys.keys()]
-        elif arg in HBNBCommand.models:
+        elif argl[0] in HBNBCommand.models:
             for i in keys.keys():
-                if i.startswith(arg):
+                if i.startswith(argl[0]):
                     keydict.append(str(keys[i]))
         else:
             print("** class doesn't exist **")
@@ -181,8 +190,9 @@ class HBNBCommand(cmd.Cmd):
         """Function updates an instance
         based on classname, id and name:value
 
-        Usage: update <class.name> <class.id>
-        <attribute.name> <attribute.value...>
+        Usage: update <class name> <id>
+        <attribute name> <attribute value...> 'or'
+        <class name>.update(<id>, <attribute name>, <attribute value>)
 
         Errors:
             if classname is missing
@@ -199,14 +209,22 @@ class HBNBCommand(cmd.Cmd):
             if args[0] not in HBNBCommand.models:
                 print("** class doesn't exist **")
                 return
-            elif len(args) == 1:
+            elif len(args) == 1 or args[1] == "":
                 print("** instance id missing **")
                 return
             elif len(args) == 2:
                 print("** attribute name missing **")
                 return
             name = f"{args[0]}.{args[1]}"
-            odict = {args[i]: args[i + 1] for i in range(2, len(args), 2)}
+            odict = {}
+            for i in range(2, len(args), 2):
+                key = args[i]
+                key = key.replace("{", "").replace(":", "")
+                key = key.replace("}", "").replace('"', "").replace("'", "")
+                val = args[i + 1]
+                val = val.replace("{", "").replace(":", "")
+                val = val.replace("}", "").replace('"', "").replace("'", "")
+                odict[key] = value
             keys = storage.all()
             if name in keys:
                 obj = keys[name]
@@ -220,12 +238,50 @@ class HBNBCommand(cmd.Cmd):
         except IndexError:
             print("** value missing **")
 
+    def do_count(self, arg):
+        """Counts the number of instances present in database
+
+        Usage: <class name>.count()
+        """
+        if arg == "":
+            print("** class name missing **")
+            return
+        argl = self.split_string(arg)
+        count = 0
+        for obj in storage.all().values():
+            if argl[0] == obj.__class__.__name__:
+                count += 1
+        print(count)
+
     def emptyline(self):
         """Do nothing to screen"""
         return
 
-    # def default(self, arg):
-    #     print(len(arg))
+    def default(self, arg):
+        """Parse commands that are <classname>.<command>
+        e.g User.create()
+        and checks if command is True"""
+        coms = {
+            "create": self.do_create,
+            "all": self.do_all,
+            "count": self.do_count,
+            "update": self.do_update,
+            "destroy": self.do_destroy,
+            "show": self.do_show
+        }
+        # model: model name
+        # act: the command to execute
+        # det: other parameters in "()"
+        # shorten because of pycodestyle
+        args = re.match(r"(?P<model>\w+)\.(?P<act>\w+)\((?P<det>.*?)\)", arg)
+        if args:
+            model = args.group("model")
+            act = args.group("act")
+            det = args.group("det")
+            det = det.replace(",", "")
+            coms[act](f"{model} {det}")
+        else:
+            print(f"** Unknown syntax: {arg}")
 
 
 if __name__ == '__main__':
