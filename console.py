@@ -220,10 +220,10 @@ class HBNBCommand(cmd.Cmd):
             for i in range(2, len(args), 2):
                 key = args[i]
                 key = key.replace("{", "").replace(":", "")
-                key = key.replace("}", "").replace('"', "")
-                value = args[i + 1]
-                value = value.replace("{", "").replace(":", "")
-                value = value.replace("}", "").replace('"', "")
+                key = key.replace("}", "").replace('"', "").replace("'", "")
+                val = args[i + 1]
+                val = val.replace("{", "").replace(":", "")
+                val = val.replace("}", "").replace('"', "").replace("'", "")
                 odict[key] = value
             keys = storage.all()
             if name in keys:
