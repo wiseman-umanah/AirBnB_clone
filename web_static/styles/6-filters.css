@@ -1,0 +1,32 @@
+.locations .popover, .amenities .popover{
+	width: 92%;
+	background-color: #FAFAFA;
+	position: absolute;
+	left: 0;
+	padding-left: 20px;
+	padding-top: 30px;
+	top: 100%;
+	margin: 0;
+	border: 1px #DDDDDD solid;
+	border-radius: 4px;
+	display: none;
+}
+
+.popover h2{
+	margin: 0;
+	font-size: 16px;
+}
+
+.popover ul{
+	margin: 0;
+	margin-bottom: 30px;
+}
+
+.popover ul li{
+	margin-bottom: 5px;
+}
+
+.locations:hover .popover, .amenities:hover .popover{
+	display: block;
+	z-index: 1;
+}

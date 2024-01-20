@@ -1,0 +1,49 @@
+.price_by_night{
+	color: #FF5A5F;
+	border: 4px #FF5A5F solid;
+	border-radius: 100%;
+	min-width: 60px;
+	height: 60px;
+	font-size: 30px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+}
+
+.information{
+	height: 80px;
+	border-top: #DDDDDD 1px solid;
+	border-bottom: #DDDDDD 1px solid;
+	margin-top: 40px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.max_guest::before{
+	content: url("../images/icon_group.png");
+	display: block;
+	width: 100px;
+}
+
+.number_rooms::before{
+	content: url("../images/icon_bed.png");
+	display: block;
+	width: 100px;
+}
+
+.number_bathrooms::before{
+	content: url("../images/icon_bath.png");
+	display: block;
+	width: 100px;
+}
+
+.user{
+	text-align: left;
+	margin-top: 10px;
+}
