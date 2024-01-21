@@ -1,0 +1,50 @@
+section article .amenities,
+section article .reviews{
+	margin-top: 40px;
+	padding: 0;
+	text-align: left;
+	width: 100%;
+}
+
+section article .amenities h2,
+section article .reviews h2{
+	font-size: 16px;
+	text-align: left;
+	border-bottom: solid 1px #DDDDDD;
+}
+
+section article .amenities ul,
+section article .reviews ul{
+	list-style-type: none;
+	padding: 0;
+}
+
+.tv-icon::before{
+	content: url("../images/icon_tv.png");
+}
+
+.wifi-icon::before{
+	content: url('../images/icon_wifi.png');
+}
+
+.pet-icon::before{
+	content: url('../images/icon_pets.png');
+}
+
+.tv-icon::before,
+.pet-icon::before,
+.wifi-icon::before{
+	vertical-align: middle;
+	margin-right: 20px;
+}
+
+section article .reviews ul li h3
+{
+	margin: 0;
+	font-size: 14px;
+}
+section article .reviews ul li p
+{
+	font-size: 12px;
+	margin: 5px 0;
+}
