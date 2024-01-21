@@ -1,0 +1,158 @@
+.places {
+    display    : flex;
+    flex-direction : row;
+    flex-wrap  : wrap;
+    justify-content: center;
+    margin-bottom  : 5%;
+}
+
+.places h1 {
+    font-size    : 30px;
+    flex : 0 1 100%;
+    margin-bottom: 0;
+    padding  : 0.5em 0 0 0.6em;
+}
+
+.places article {
+    width  : 390px;
+    margin : 20px;
+    padding    : 20px;
+    border : 1px solid #FF5a5F;
+    border-radius  : 4px;
+    display    : flex;
+    flex-direction : column;
+    justify-content: flex-start;
+    position   : relative;
+}
+
+
+.places article h2 {
+    font-size : 30px;
+    align-self: center;
+    margin    : 0;
+}
+
+.price_by_night {
+    font-size  : 30px;
+    height : 60px;
+    color  : #FF5a5F;
+    border : #FF5a5F solid 4px;
+    border-radius  : 50%;
+    display    : flex;
+    justify-content: center;
+    align-items    : center;
+    min-width  : 60px;
+    position   : absolute;
+    top    : 10px;
+    right  : 20px;
+
+}
+
+.information {
+    height : 80px;
+    border-top : #DDDDDD 1px solid;
+    border-bottom  : #DDDDDD 1px solid;
+    margin-top : 1.8em;
+    width  : 100%;
+    display    : flex;
+    justify-content: center;
+    align-items    : center;
+    flex-direction : row;
+}
+
+.information div {
+    width : 100px;
+    text-align: center;
+}
+
+.information div p {
+    margin-top   : auto;
+    margin-bottom: auto;
+}
+
+.user p {
+    padding-top  : 0.7em;
+    margin-bottom: 5px;
+}
+
+.places .amenities {
+    margin-top: 40px;
+}
+
+.places .amenities h2 {
+    font-size: 16px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.places .amenities ul {
+    list-style: none;
+	padding: 0;
+}
+
+.places .reviews h2 {
+    font-size: 16px;
+    border-bottom: 1px #DDDDDD solid;
+}
+
+.places .reviews li,
+.places .reviews ul {
+    padding: 0;
+}
+
+.reviews li h3 {
+    font-size: 14px;
+	margin: 0;
+}
+
+.reviews li p {
+    font-size: 12px;
+	margin-top: 0;
+}
+
+.reviews ul {
+    list-style: none;
+}
+
+.max_guest,
+.number_rooms,
+.number_bathrooms{
+	display: flex;
+	width: 100px;
+	flex-direction: column;
+	align-items: center;
+}
+
+.max_guest img,
+.number_rooms img,
+.number_bathrooms img{
+	width: 50%;
+}
+
+.max_guest p,
+.number_rooms p,
+.number_bathrooms p,
+.tv-icon p,
+.wifi-icon p,
+.pet-icon p{
+	display: inline-block;
+}
+
+.tv-icon,
+.wifi-icon,
+.pet-icon{
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.tv-icon img,
+.wifi-icon img,
+.pet-icon img{
+	width: 25px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .places h1 {
+    width: 95%;
+    }
+}
