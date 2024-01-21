@@ -1,0 +1,8 @@
+.places{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.places h1{
+	flex: 1 0 100%;
+}
