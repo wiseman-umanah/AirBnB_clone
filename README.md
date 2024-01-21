@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-AIR BNB CLONE
-=======
-### 0x00.AirBnB Clone - The Console
+## AirBnB Clone - The Console
 The AirBnB Clone: Console is a simple yet powerful interface that allows users to create, update and destroy instances with unique IDs. With a user-friendly CLI, it provides a convenient way to harness the details of users with specific and unique IDs based on their class in a database file.
 
 ## FEATURES
@@ -68,8 +65,7 @@ Help command example
 |                   |information                                  |                                                     |
 
 ## Tests
-
-Each class, function and module have been tested and proven to be True.
+This program has been successfully tested.
 
 ## Authors
 
@@ -77,4 +73,3 @@ Each class, function and module have been tested and proven to be True.
 * Jane Wugathi - [Jane](https://github.com/codingbot995)
  
 Copyright © 2024, All rights reserved.
->>>>>>> e81cd874d33094da4aa858f7dd43930108143057
