@@ -23,6 +23,7 @@
     flex-direction : column;
     justify-content: flex-start;
     position   : relative;
+	gap: 10px;
 }
 
 
@@ -68,11 +69,6 @@
 .information div p {
     margin-top   : auto;
     margin-bottom: auto;
-}
-
-.user p {
-    padding-top  : 0.7em;
-    margin-bottom: 5px;
 }
 
 .places .amenities {
@@ -126,6 +122,7 @@
 .number_rooms img,
 .number_bathrooms img{
 	width: 50%;
+	height: 50%;
 }
 
 .max_guest p,
@@ -149,6 +146,7 @@
 .wifi-icon img,
 .pet-icon img{
 	width: 25px;
+	height: 25px;
 }
 
 @media only screen and (max-width: 1000px) {
