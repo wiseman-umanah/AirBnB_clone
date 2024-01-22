@@ -82,3 +82,10 @@ margin: 0;
 .popover li {
 margin: 12px;
 }
+
+@media only screen and (max-width: 1000px) {
+    .filters .locations h4,
+	.filters .amenities h4 {
+    font-size: 12px;
+    }
+}

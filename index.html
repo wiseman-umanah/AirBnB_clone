@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>AirBnB Project</title>
+		<title>AirBnB</title>
 		<meta charset="UTF-8">
-		<meta name="view-port" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="author" content="Wiseman Umanah">
-		<meta name="description" content="A simple static website (AirBnB)">
+		<meta name="description" content="A simple website with a header and footer(css)">
 		<link rel="icon" href="images/icon.png" type="image/png">
-		<link rel="stylesheet" href="web_static/styles/4-common.css">
-		<link rel="stylesheet" href="web_static/styles/3-header.css">
-		<link rel="stylesheet" href="web_static/styles/3-footer.css">
-		<link rel="stylesheet" href="web_static/styles/4-filters.css">
-		<link rel="stylesheet" href="web_static/styles/5-filters.css">
-		<link rel="stylesheet" href="web_static/styles/6-filters.css">
-		<link rel="stylesheet" href="web_static/styles/7-places.css">
-		<link rel="stylesheet" href="web_static/styles/8-places.css">
-		<link rel="stylesheet" href="web_static/styles/100-places.css">
+		<link rel="stylesheet" href="styles/103-common.css">
+		<link rel="stylesheet" href="styles/103-header.css">
+		<link rel="stylesheet" href="styles/103-footer.css">
+		<link rel="stylesheet" href="styles/103-filters.css">
+		<link rel="stylesheet" href="styles/103-places.css">
 	</head>
 	<body>
 		<header>
-			<div class="airbnb-logo"></div>
+			<img src="images/logo.png" alt="The logo of Holberton (alx) school" class="airbnb-logo">
 		</header>
-		<div class="container">
+		<main class="container">
 			<section class="filters">
 				<div class="locations">
 					<h3>States</h3>
@@ -60,9 +56,18 @@
 						<h2>My Home</h2>
 						<div class="price_by_night">$80</div>
 						<div class="information">
-							<div class="max_guest">5 Guests</div>
-							<div class="number_rooms">1 Bedroom</div>
-							<div class="number_bathrooms">1 Bathroom</div>
+							<div class="max_guest">
+								<img src="images/icon_group.png" alt="picture shows the different groups available">
+								<p>5 Guests</p>
+							</div>
+							<div class="number_rooms">
+								<img src="images/icon_bed.png" alt="picture shows the number of rooms available">
+								<p>1 Bedroom</p>
+							</div>
+							<div class="number_bathrooms">
+								<img src="images/icon_bath.png" alt="picture shows the different groups available">
+								<p>1 Bathroom</p>
+							</div>
 						</div>
 						<div class="user">
 							<b>Owner</b>: Wiseman Umanah<br><br>
@@ -82,9 +87,18 @@
 						<div class="amenities">
 							<h2>Amenities</h2>
 							<ul>
-								<li class="tv-icon">Tv</li>
-								<li class="wifi-icon">WiFi</li>
-								<li class="pet-icon">Pets friendly</li>
+								<li class="tv-icon">
+									<img src="images/icon_tv.png" alt="This is a picture of a Tv as part of the list">
+									<p>Tv</p>
+								</li>
+								<li class="wifi-icon">
+									<img src="images/icon_wifi.png" alt="This is a picture of a WiFi as part of the list">
+									<p>WiFi</p>
+								</li>
+								<li class="pet-icon">
+									<img src="images/icon_pets.png" alt="This is a picture of a pet as part of the list">
+									<p>Pets friendly</p>
+								</li>
 							</ul>
 						</div>
 						<div class="reviews">
@@ -105,9 +119,18 @@
 						<h2>Tiny House</h2>
 						<div class="price_by_night">$65</div>
 						<div class="information">
-							<div class="max_guest">15 Guests</div>
-							<div class="number_rooms">4 Bedrooms</div>
-							<div class="number_bathrooms">2 Bathrooms</div>
+							<div class="max_guest">
+								<img src="images/icon_group.png" alt="picture shows the different groups available">
+								<p>15 Guests</p>
+							</div>
+							<div class="number_rooms">
+								<img src="images/icon_bed.png" alt="picture shows the number of rooms available">
+								<p>4 Bedrooms</p>
+							</div>
+							<div class="number_bathrooms">
+								<img src="images/icon_bath.png" alt="picture shows the different groups available">
+								<p>2 Bathrooms</p>
+							</div>
 						</div>
 						<div class="user">
 							<b>Owner</b>: Jane Wugathi<br><br>
@@ -126,7 +149,10 @@
 						<div class="amenities">
 							<h2>Amenities</h2>
 							<ul>
-								<li class="pet-icon">Pets friendly</li>
+								<li class="pet-icon">
+									<img src="images/icon_pets.png" alt="This is a picture of a pet as part of the list">
+									<p>Pets friendly</p>
+								</li>
 							</ul>
 						</div>
 						<div class="reviews">
@@ -159,9 +185,18 @@
 					<h2>A suite</h2>
 					<div class="price_by_night">$190</div>
 					<div class="information">
-						<div class="max_guest">2 Guests</div>
-						<div class="number_rooms">3 Bedrooms</div>
-						<div class="number_bathrooms">2 Bathrooms</div>
+						<div class="max_guest">
+							<img src="images/icon_group.png" alt="picture shows the different groups available">
+							<p>2 Guests</p>
+						</div>
+						<div class="number_rooms">
+							<img src="images/icon_bed.png" alt="picture shows the number of rooms available">
+							<p>3 Bedrooms</p>
+						</div>
+						<div class="number_bathrooms">
+							<img src="images/icon_bath.png" alt="picture shows the different groups available">
+							<p>2 Bathrooms</p>
+						</div>
 					</div>
 					<div class="user">
 						<b>Owner</b>: ALX Business Suite<br><br>
@@ -181,8 +216,14 @@
 					<div class="amenities">
 						<h2>Amenities</h2>
 						<ul>
-							<li class="tv-icon">Tv</li>
-							<li class="wifi-icon">WiFi</li>
+							<li class="tv-icon">
+								<img src="images/icon_tv.png" alt="This is a picture of a Tvas part of the list">
+								<p>Tv</p>
+							</li>
+							<li class="wifi-icon">
+								<img src="images/icon_pets.png" alt="This is a picture of a pet as part of the list">
+								<p>WiFi</p>
+							</li>
 						</ul>
 					</div>
 					<div class="reviews">
@@ -200,7 +241,7 @@
 					</div>
 				</article>
 			</section>
-		</div>
+		</main>
 		<footer>Best School</footer>
 	</body>
 </html>
