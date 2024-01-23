@@ -70,6 +70,6 @@ This program has been successfully tested.
 ## Authors
 
 * Wiseman Umanah  - [Wiseman](https://github.com/wiseman-umanah)
-* Jane Wugathi - [Jane](https://github.com/codingbot995)
+* Jane Mathenge - [Jane](https://github.com/codingbot995)
  
 Copyright © 2024, All rights reserved.
