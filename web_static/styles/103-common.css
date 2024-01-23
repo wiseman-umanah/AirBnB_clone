@@ -1,6 +1,5 @@
 html {
     position: relative;
-    min-height: 100vh;
 }
 body {
     margin: 0;
@@ -13,10 +12,10 @@ body {
 .container {
     max-width: 1000px;
     margin: 30px auto;
-    bottom: 30px;
 }
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 500px),
+(max-width: 1000px){
 	.container{
 		max-width: 90%;
 	}

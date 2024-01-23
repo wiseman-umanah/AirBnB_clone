@@ -1,6 +1,5 @@
 .places {
     display    : flex;
-    flex-direction : row;
     flex-wrap  : wrap;
     justify-content: center;
     margin-bottom  : 5%;
@@ -36,8 +35,8 @@
 .price_by_night {
     font-size  : 30px;
     height : 60px;
-    color  : #FF5a5F;
-    border : #FF5a5F solid 4px;
+    color  : #FF393F;
+    border : #FF393F solid 4px;
     border-radius  : 50%;
     display    : flex;
     justify-content: center;
@@ -149,7 +148,7 @@
 	height: 25px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 500px) {
     .places h1{
     font-size: 100%;
     }
